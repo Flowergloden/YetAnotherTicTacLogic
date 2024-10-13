@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LogicLayer : MonoBehaviour
+public enum MapElementType
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    None,
+    Circle,
+    Cross,
+}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+public class LogicLayer
+{
+    private static LogicLayer _instance;
+    public static LogicLayer Instance => _instance ??= new LogicLayer();
+
+    public List<List<MapData>> MapData = new();
+
+    public Queue<Vector2> UpdateQueue = new();
+}
+
+public class MapData
+{
+    public MapElementType Type;
 }
