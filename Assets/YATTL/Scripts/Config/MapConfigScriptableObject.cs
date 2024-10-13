@@ -13,7 +13,7 @@ public class MapConfigScriptableObject : ScriptableObject
                 return _instance;
             }
 
-            var assets = FindObjectsOfType<MapConfigScriptableObject>();
+            var assets = Resources.FindObjectsOfTypeAll<MapConfigScriptableObject>();
             switch (assets.Length)
             {
                 case > 1:
