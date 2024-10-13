@@ -552,4 +552,6 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 # Nuget
-Assets/Plugins
+Assets/Plugins/**
+!Assets/Plugins/**/
+!Assets/Plugins/**/*.dll.meta
