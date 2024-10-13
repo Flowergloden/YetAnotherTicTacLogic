@@ -21,5 +21,5 @@ public class LogicLayer
 
 public class MapData
 {
-    public MapElementType Type;
+    public MapElementType Type = MapElementType.None;
 }
