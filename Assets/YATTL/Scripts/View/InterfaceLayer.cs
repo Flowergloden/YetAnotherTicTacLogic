@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class InterfaceLayer : MonoBehaviour
 {
-    private LogicLayer LogicLayer => LogicLayer.Instance;
-    private MapConfigScriptableObject MapConfig => MapConfigScriptableObject.Instance;
+    private static LogicLayer LogicLayer => LogicLayer.Instance;
+    private static MapConfigScriptableObject MapConfig => MapConfigScriptableObject.Instance;
 
+    private static Camera MainCamera => Camera.main;
     private GameObject _map;
-    private Dictionary<Vector2, GameObject> _generated = new();
+    private readonly Dictionary<Vector2, GameObject> _generated = new();
 
     private void Start()
     {
         _map = new GameObject("Map");
         var delta = MapConfig.elementSize + MapConfig.splitSize;
+
+        MainCamera.transform.position =
+            new Vector3((MapConfig.mapSize / 2f - 0.5f * MapConfig.elementSize) * delta,
+                (MapConfig.mapSize / 2f - 0.5f * MapConfig.elementSize) * delta, -10f);
 
         for (int x = 0; x < LogicLayer.MapData.Count; x++)
         {
