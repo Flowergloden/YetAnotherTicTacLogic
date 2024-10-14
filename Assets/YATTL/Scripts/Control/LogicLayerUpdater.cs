@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class LogicLayerUpdater
 {
     private static LogicLayerUpdater _instance;
     public static LogicLayerUpdater Instance => _instance ??= new LogicLayerUpdater();
 
-    private MapConfigScriptableObject MapConfig => MapConfigScriptableObject.Instance;
-    private LogicLayer LogicLayer => LogicLayer.Instance;
     private static MapConfigScriptableObject MapConfig => MapConfigScriptableObject.Instance;
     private static LogicLayer LogicLayer => LogicLayer.Instance;
 
@@ -22,5 +21,11 @@ public class LogicLayerUpdater
                 LogicLayer.MapData[x].Add(new MapData());
             }
         }
+    }
+
+    public void Update(Vector2 pos, MapData data)
+    {
+        LogicLayer.MapData[(int)pos.x][(int)pos.y] = data;
+        LogicLayer.UpdateQueue.Enqueue(pos);
     }
 }
