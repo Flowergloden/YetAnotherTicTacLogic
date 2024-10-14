@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc6758d38bb4aa1a921c8d09895af40, type: 3}
   m_Name: "\u68CB\u76D8\u6570\u636E"
   m_EditorClassIdentifier: 
-  mapSize: 3
+  mapSize: 5
+  elementSize: 1
+  splitSize: 0.1
+  elements:
+  - {fileID: 6221178333397695136, guid: 25471c98b8f14674194aaa954edb77f6, type: 3}
+  - {fileID: 6221178333397695136, guid: e61cd2b7addefee4a8d87309f8c68491, type: 3}
+  - {fileID: 6221178333397695136, guid: d3cbfed6e380233448fade9b139ad725, type: 3}
