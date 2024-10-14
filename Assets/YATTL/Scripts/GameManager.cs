@@ -11,5 +11,6 @@ public class GameManager : MonoBehaviour
 
         LogicLayerUpdater.Instance.Initialize();
         gameObject.AddComponent<InterfaceLayer>();
+        gameObject.AddComponent<WinnerDetector>();
     }
 }
