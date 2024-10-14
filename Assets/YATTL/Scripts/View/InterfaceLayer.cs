@@ -1,15 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class InterfaceLayer : MonoBehaviour
 {
+    public static InterfaceLayer Instance;
+
     private static LogicLayer LogicLayer => LogicLayer.Instance;
     private static MapConfigScriptableObject MapConfig => MapConfigScriptableObject.Instance;
 
     private static Camera MainCamera => Camera.main;
     private GameObject _map;
-    private readonly Dictionary<Vector2, GameObject> _generated = new();
+    public readonly Dictionary<Vector2, GameObject> Generated = new();
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -28,7 +36,7 @@ public class InterfaceLayer : MonoBehaviour
                     new Vector3(x * delta, y * delta, 0),
                     Quaternion.identity, _map.transform);
                 obj.transform.localScale = new Vector3(MapConfig.elementSize, MapConfig.elementSize, 1);
-                _generated[new Vector2(x, y)] = obj;
+                Generated[new Vector2(x, y)] = obj;
             }
         }
     }
@@ -38,7 +46,7 @@ public class InterfaceLayer : MonoBehaviour
         while (LogicLayer.UpdateQueue.Any())
         {
             var pos = LogicLayer.UpdateQueue.Dequeue();
-            Destroy(_generated[pos]);
+            Destroy(Generated[pos]);
 
             var delta = MapConfig.elementSize + MapConfig.splitSize;
             var x = (int)pos.x;
@@ -47,7 +55,7 @@ public class InterfaceLayer : MonoBehaviour
                 new Vector3(x * delta, y * delta, 0),
                 Quaternion.identity, _map.transform);
             obj.transform.localScale = new Vector3(MapConfig.elementSize, MapConfig.elementSize, 1);
-            _generated[new Vector2(x, y)] = obj;
+            Generated[new Vector2(x, y)] = obj;
         }
     }
 }
