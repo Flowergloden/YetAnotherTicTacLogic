@@ -15,13 +15,16 @@ public class PlacementButtonDrawer : MonoBehaviour
 
     private void Start()
     {
+        var tex = new Texture2D(1, 1);
+        tex.SetPixel(0, 0, Color.clear);
+        tex.Apply();
         _mainCamera = Camera.main;
-        _style = new()
+        _style = new GUIStyle
         {
             normal = new GUIStyleState()
             {
-                background = new Texture2D(1, 1),
-            }
+                background = tex,
+            },
         };
     }
 
