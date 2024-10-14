@@ -7,6 +7,8 @@ public class LogicLayerUpdater
 
     private MapConfigScriptableObject MapConfig => MapConfigScriptableObject.Instance;
     private LogicLayer LogicLayer => LogicLayer.Instance;
+    private static MapConfigScriptableObject MapConfig => MapConfigScriptableObject.Instance;
+    private static LogicLayer LogicLayer => LogicLayer.Instance;
 
     public void Initialize()
     {

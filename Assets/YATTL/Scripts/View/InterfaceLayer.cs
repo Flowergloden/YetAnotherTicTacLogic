@@ -16,7 +16,7 @@ public class InterfaceLayer : MonoBehaviour
         {
             for (int y = 0; y < LogicLayer.MapData[0].Count; y++)
             {
-                var obj = Instantiate(MapConfig.elements[(int)MapData.Type],
+                var obj = Instantiate(MapConfig.elements[(int)LogicLayer.MapData[x][y].Type],
                     new Vector3(x * delta, y * delta, 0),
                     Quaternion.identity, _map.transform);
                 obj.transform.localScale = new Vector3(MapConfig.elementSize, MapConfig.elementSize, 1);

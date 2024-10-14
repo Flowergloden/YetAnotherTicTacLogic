@@ -14,12 +14,12 @@ public class LogicLayer
     private static LogicLayer _instance;
     public static LogicLayer Instance => _instance ??= new LogicLayer();
 
-    public List<List<MapData>> MapData = new();
+    public readonly List<List<MapData>> MapData = new();
 
-    public Queue<Vector2> UpdateQueue = new();
+    public readonly Queue<Vector2> UpdateQueue = new();
 }
 
-public class MapData
+public record MapData
 {
-    public const MapElementType Type = MapElementType.None;
+    public MapElementType Type = MapElementType.None;
 }
