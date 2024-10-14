@@ -7,23 +7,31 @@ public class PlacementButtonDrawer : MonoBehaviour
     private static LogicLayer LogicLayer => LogicLayer.Instance;
     private static LogicLayerUpdater LogicLayerUpdater => LogicLayerUpdater.Instance;
     private static InterfaceLayer InterfaceLayer => InterfaceLayer.Instance;
+    private static GameManager GameManager => GameManager.Instance;
+
     private static Camera _mainCamera;
 
-    private readonly GUIStyle _style = new()
-    {
-        normal = new GUIStyleState()
-        {
-            background = new Texture2D(1, 1),
-        }
-    };
+    private GUIStyle _style;
 
     private void Start()
     {
         _mainCamera = Camera.main;
+        _style = new()
+        {
+            normal = new GUIStyleState()
+            {
+                background = new Texture2D(1, 1),
+            }
+        };
     }
 
     private void OnGUI()
     {
+        if (!GameManager.bPlayerMove)
+        {
+            return;
+        }
+
         for (int x = 0; x < LogicLayer.MapData.Count; x++)
         {
             for (int y = 0; y < LogicLayer.MapData[0].Count; y++)
@@ -46,7 +54,9 @@ public class PlacementButtonDrawer : MonoBehaviour
 
                     if (GUI.Button(rect, GUIContent.none, _style))
                     {
-                        LogicLayerUpdater.Update(pos, new MapData { Type = MapElementType.Circle });
+                        LogicLayerUpdater.Update(pos,
+                            new MapData { Type = GameManager.bCross ? MapElementType.Cross : MapElementType.Circle });
+                        GameManager.bPlayerMove = !GameManager.bPlayerMove;
                     }
                 }
             }
