@@ -58,9 +58,9 @@ public class PlacementButtonDrawer : MonoBehaviour
                     if (GUI.Button(rect, GUIContent.none, _style))
                     {
                         LogicLayerUpdater.Update(pos,
-                            new MapData { Type = GameManager.bCircle ? MapElementType.Cross : MapElementType.Circle });
-                        GameManager.bPlayerMove = !GameManager.bPlayerMove;
+                            new MapData { Type = GameManager.bCircle ? MapElementType.Circle : MapElementType.Cross });
                         GameManager.bCircle = !GameManager.bCircle;
+                        GameManager.bPlayerMove = !GameManager.bPlayerMove;
                     }
                 }
             }
