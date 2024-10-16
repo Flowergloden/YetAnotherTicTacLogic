@@ -16,11 +16,11 @@ public class Game : IGame<List<List<MapData>>>
         do
         {
             var available = new List<Vector2>();
-            for (var x = 0; x < data.Count; x++)
+            for (var x = 0; x < copiedData.Count; x++)
             {
-                for (var y = 0; y < data[x].Count; y++)
+                for (var y = 0; y < copiedData[x].Count; y++)
                 {
-                    if (data[x][y].Type == MapElementType.None)
+                    if (copiedData[x][y].Type == MapElementType.None)
                     {
                         available.Add(new Vector2(x, y));
                     }
