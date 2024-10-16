@@ -6,6 +6,9 @@ using Random = System.Random;
 
 public class Game : IGame<List<List<MapData>>>
 {
+    private static Game _instance;
+    public static Game Instance => _instance ??= new Game();
+
     public bool StartAGame(List<List<MapData>> data)
     {
         var bStartCross = !GameManager.Instance.bCircle; // this latch has converted by GetPossibleMoves
