@@ -10,34 +10,40 @@ public class WinnerDetector : MonoBehaviour
 
     private void Update()
     {
-        foreach (var line in LogicLayer.MapData)
+        if (Detect(LogicLayer.MapData))
         {
-            Detect(line);
+            OnWin?.Invoke(null, EventArgs.Empty);
         }
-
-        var transposed = LogicLayer.MapData.Select((x, i) => LogicLayer.MapData.Select(y => y[i]).ToList()).ToList();
-        foreach (var row in transposed)
-        {
-            Detect(row);
-        }
-
-        var diagonal1 = LogicLayer.MapData.Select((_, i) => LogicLayer.MapData[i][i]).ToList();
-        Detect(diagonal1);
-        var diagonal2 = LogicLayer.MapData.Select((_, i) =>
-            LogicLayer.MapData[i][LogicLayer.MapData.Count - i - 1]).ToList();
-        Detect(diagonal2);
     }
 
-    private void Detect(List<MapData> data)
+    public static bool Detect(List<List<MapData>> data)
+    {
+        if (data.Any(InnerDetect))
+        {
+            return true;
+        }
+
+        var transposed = data.Select((x, i) => data.Select(y => y[i]).ToList()).ToList();
+        if (transposed.Any(InnerDetect))
+        {
+            return true;
+        }
+
+        var diagonal1 = data.Select((_, i) => data[i][i]).ToList();
+
+        var diagonal2 = data.Select((_, i) =>
+            data[i][data.Count - i - 1]).ToList();
+
+        return InnerDetect(diagonal1) || InnerDetect(diagonal2);
+    }
+
+    private static bool InnerDetect(List<MapData> data)
     {
         if (data.GroupBy(x => x.Type).Count() == 1)
         {
-            if (data[0].Type == MapElementType.None)
-            {
-                return;
-            }
-
-            OnWin?.Invoke(this, EventArgs.Empty);
+            return data[0].Type != MapElementType.None;
         }
+
+        return true;
     }
 }
