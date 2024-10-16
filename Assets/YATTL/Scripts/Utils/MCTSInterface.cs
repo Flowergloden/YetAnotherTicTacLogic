@@ -13,6 +13,9 @@ public class Game : IGame<List<List<MapData>>>
 
         var bCross = bStartCross;
         var random = new Random();
+
+        // TODO: weighting it in MCTS library
+        var bTie = false;
         do
         {
             var available = new List<Vector2>();
@@ -27,6 +30,12 @@ public class Game : IGame<List<List<MapData>>>
                 }
             }
 
+            if (!available.Any())
+            {
+                bTie = true;
+                break;
+            }
+
             var index = random.Next(0, available.Count - 1);
             var tar = available[index];
 
@@ -36,7 +45,7 @@ public class Game : IGame<List<List<MapData>>>
             bCross = !bCross;
         } while (IsEnd(copiedData));
 
-        return bStartCross != bCross; // this latch is converted one more time at the end of loop
+        return !bTie && bStartCross != bCross; // this latch is converted one more time at the end of loop
     }
 
     public List<List<MapData>> Data => LogicLayer.Instance.MapData;
