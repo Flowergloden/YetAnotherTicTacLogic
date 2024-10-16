@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
             }
 
             bPlayerMove = true;
+            bCircle = !bCircle;
         }
     }
 }
