@@ -1,0 +1,3 @@
+[submodule "Assets/Submodule/MCTS"]
+	path = Assets/Submodule/MCTS
+	url = git@github.com:Flowergloden/MCTSCS.git
