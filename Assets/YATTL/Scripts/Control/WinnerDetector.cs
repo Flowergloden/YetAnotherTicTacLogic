@@ -44,6 +44,6 @@ public class WinnerDetector : MonoBehaviour
             return data[0].Type != MapElementType.None;
         }
 
-        return true;
+        return false;
     }
 }
