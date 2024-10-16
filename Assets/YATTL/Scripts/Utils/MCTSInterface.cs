@@ -46,7 +46,7 @@ public class Game : IGame<List<List<MapData>>>
                 ? MapElementType.Cross
                 : MapElementType.Circle;
             bCross = !bCross;
-        } while (IsEnd(copiedData));
+        } while (!IsEnd(copiedData));
 
         if (bTie)
         {
@@ -76,8 +76,8 @@ public class Game : IGame<List<List<MapData>>>
         {
             var newData = data.Select(x => x.Select(y => new MapData { Type = y.Type }).ToList()).ToList();
             newData[(int)pos.x][(int)pos.y].Type = GameManager.Instance.bCircle
-                ? MapElementType.Cross
-                : MapElementType.Circle;
+                ? MapElementType.Circle
+                : MapElementType.Cross;
             return newData;
         }).ToArray();
     }
