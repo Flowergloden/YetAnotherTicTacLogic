@@ -9,7 +9,7 @@ public class Game : IGame<List<List<MapData>>>
     private static Game _instance;
     public static Game Instance => _instance ??= new Game();
 
-    public bool StartAGame(List<List<MapData>> data)
+    public int StartAGame(List<List<MapData>> data)
     {
         var bStartCross = !GameManager.Instance.bCircle; // this latch has converted by GetPossibleMoves
         var copiedData = data.Select(x => x.Select(y => new MapData { Type = y.Type }).ToList()).ToList();
@@ -48,7 +48,12 @@ public class Game : IGame<List<List<MapData>>>
             bCross = !bCross;
         } while (IsEnd(copiedData));
 
-        return !bTie && bStartCross != bCross; // this latch is converted one more time at the end of loop
+        if (bTie)
+        {
+            return 0;
+        }
+
+        return bStartCross != bCross ? 1 : -1; // this latch is converted one more time at the end of loop
     }
 
     public List<List<MapData>> Data => LogicLayer.Instance.MapData;
