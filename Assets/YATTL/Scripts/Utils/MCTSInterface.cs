@@ -8,7 +8,7 @@ public class Game : IGame<List<List<MapData>>>
 {
     public bool StartAGame(List<List<MapData>> data)
     {
-        var bStartCross = !GameManager.Instance.bCross; // this latch has converted by GetPossibleMoves
+        var bStartCross = !GameManager.Instance.bCircle; // this latch has converted by GetPossibleMoves
         var copiedData = data.Select(x => x.Select(y => new MapData { Type = y.Type }).ToList()).ToList();
 
         var bCross = bStartCross;
@@ -67,7 +67,7 @@ public class Game : IGame<List<List<MapData>>>
         return available.Select(pos =>
         {
             var newData = data.Select(x => x.Select(y => new MapData { Type = y.Type }).ToList()).ToList();
-            newData[(int)pos.x][(int)pos.y].Type = GameManager.Instance.bCross
+            newData[(int)pos.x][(int)pos.y].Type = GameManager.Instance.bCircle
                 ? MapElementType.Cross
                 : MapElementType.Circle;
             return newData;

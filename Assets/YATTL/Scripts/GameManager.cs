@@ -7,14 +7,14 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public bool bPlayerMove;
-    public bool bCross;
+    public bool bCircle;
 
     private void Awake()
     {
         Instance = this;
 
         bPlayerMove = Constants.Game.bPlayerMoveFirst;
-        bCross = Constants.Game.bCircleFirst;
+        bCircle = Constants.Game.bCircleFirst;
 
         LogicLayerUpdater.Instance.Initialize();
         gameObject.AddComponent<InterfaceLayer>();
