@@ -21,12 +21,12 @@ MonoBehaviour:
     treeSteps2Win: 0
   - difficulty: 1
     maxDepth: 20
-    win: 10
+    win: 999
     oneStep2Win: 10
     twoSteps2Win: 5
     treeSteps2Win: 1
   mctsConfig:
-  - difficulty: 3
+  - difficulty: 2
     c: 1.5
     maxDepth: 100
     gamesPerSimulation: 100
