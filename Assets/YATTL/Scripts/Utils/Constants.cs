@@ -2,8 +2,10 @@
 {
     public static class Game
     {
-        public static bool bPlayerMoveFirst = true;
-        public static bool bCircleFirst = true;
+        private static GameConfigScriptableObject GameConfig => GameConfigScriptableObject.Instance;
+        public static bool bPlayerMoveFirst = GameConfig.bPlayerMoveFirst;
+        public static bool bCircleFirst = GameConfig.bCircleFirst;
+        public static bool bMCTS = GameConfig.bMCTS;
     }
 
     public static class Map

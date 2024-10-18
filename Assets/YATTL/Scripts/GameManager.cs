@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 
         bPlayerMove = Constants.Game.bPlayerMoveFirst;
         bCircle = Constants.Game.bCircleFirst;
-        bMCTS = false;
+        bMCTS = Constants.Game.bMCTS;
 
         LogicLayerUpdater.Instance.Initialize();
         gameObject.AddComponent<InterfaceLayer>();
