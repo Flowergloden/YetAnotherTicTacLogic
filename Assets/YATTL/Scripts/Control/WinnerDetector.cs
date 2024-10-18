@@ -22,6 +22,11 @@ public class WinnerDetector : MonoBehaviour
         {
             OnWin?.Invoke(null, EventArgs.Empty);
         }
+
+        if (!LogicLayer.MapData.Any(line => line.Any(data => data.Type == MapElementType.None)))
+        {
+            OnWin?.Invoke(null, EventArgs.Empty);
+        }
     }
 
     public static bool Detect(List<List<MapData>> data, int num)
