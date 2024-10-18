@@ -13,20 +13,20 @@ MonoBehaviour:
   m_Name: "AI\u914D\u7F6E"
   m_EditorClassIdentifier: 
   minimaxConfig:
-  - difficulty: 0
+  - difficulty: 1
     maxDepth: 1
     win: 0
     oneStep2Win: 0
     twoSteps2Win: 0
     treeSteps2Win: 0
-  - difficulty: 1
+  - difficulty: 2
     maxDepth: 20
-    win: 999
+    win: 10
     oneStep2Win: 10
     twoSteps2Win: 5
     treeSteps2Win: 1
   mctsConfig:
-  - difficulty: 2
+  - difficulty: 3
     c: 1.5
     maxDepth: 100
     gamesPerSimulation: 100
