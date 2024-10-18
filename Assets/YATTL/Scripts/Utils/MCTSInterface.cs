@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using MonteCarloTreeSearch;
+using MinimaxCS;
 using UnityEngine;
 using Random = System.Random;
 
@@ -57,6 +58,22 @@ public class Game : IGame<List<List<MapData>>>
     }
 
     public List<List<MapData>> Data => LogicLayer.Instance.MapData;
+
+    public float Evaluate(List<List<MapData>> data)
+    {
+        if (WinnerDetector.Detect(data, Constants.Map.MapSize))
+        {
+            return Constants.Minimax.Win;
+        }
+
+        return Constants.Map.MapSize switch
+        {
+            > 1 when WinnerDetector.Detect(data, Constants.Map.MapSize - 1) => Constants.Minimax.OneStep2Win,
+            > 2 when WinnerDetector.Detect(data, Constants.Map.MapSize - 2) => Constants.Minimax.TwoSteps2Win,
+            > 3 when WinnerDetector.Detect(data, Constants.Map.MapSize - 3) => Constants.Minimax.TreeSteps2Win,
+            _ => 0
+        };
+    }
 
     public List<List<MapData>>[] GetPossibleMoves(List<List<MapData>> data)
     {
