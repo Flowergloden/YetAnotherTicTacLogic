@@ -22,11 +22,11 @@ public class InterfaceLayer : MonoBehaviour
     private void Start()
     {
         _map = new GameObject("Map");
-        var delta = MapConfig.elementSize + MapConfig.splitSize;
+        var delta = Constants.Map.ElementSize + Constants.Map.SplitSize;
 
         MainCamera.transform.position =
-            new Vector3((MapConfig.mapSize / 2f - 0.5f * MapConfig.elementSize) * delta,
-                (MapConfig.mapSize / 2f - 0.5f * MapConfig.elementSize) * delta, -10f);
+            new Vector3((Constants.Map.MapSize / 2f - 0.5f * Constants.Map.ElementSize) * delta,
+                (Constants.Map.MapSize / 2f - 0.5f * Constants.Map.ElementSize) * delta, -10f);
 
         for (int x = 0; x < LogicLayer.MapData.Count; x++)
         {
@@ -35,7 +35,7 @@ public class InterfaceLayer : MonoBehaviour
                 var obj = Instantiate(MapConfig.elements[(int)LogicLayer.MapData[x][y].Type],
                     new Vector3(x * delta, y * delta, 0),
                     Quaternion.identity, _map.transform);
-                obj.transform.localScale = new Vector3(MapConfig.elementSize, MapConfig.elementSize, 1);
+                obj.transform.localScale = new Vector3(Constants.Map.ElementSize, Constants.Map.ElementSize, 1);
                 Generated[new Vector2(x, y)] = obj;
             }
         }
@@ -48,13 +48,13 @@ public class InterfaceLayer : MonoBehaviour
             var pos = LogicLayer.UpdateQueue.Dequeue();
             Destroy(Generated[pos]);
 
-            var delta = MapConfig.elementSize + MapConfig.splitSize;
+            var delta = Constants.Map.ElementSize + Constants.Map.SplitSize;
             var x = (int)pos.x;
             var y = (int)pos.y;
             var obj = Instantiate(MapConfig.elements[(int)LogicLayer.MapData[x][y].Type],
                 new Vector3(x * delta, y * delta, 0),
                 Quaternion.identity, _map.transform);
-            obj.transform.localScale = new Vector3(MapConfig.elementSize, MapConfig.elementSize, 1);
+            obj.transform.localScale = new Vector3(Constants.Map.ElementSize, Constants.Map.ElementSize, 1);
             Generated[new Vector2(x, y)] = obj;
         }
     }

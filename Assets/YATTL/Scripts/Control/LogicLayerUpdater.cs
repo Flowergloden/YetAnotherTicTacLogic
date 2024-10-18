@@ -13,10 +13,10 @@ public class LogicLayerUpdater
     {
         LogicLayer.MapData.Clear();
 
-        for (int x = 0; x < MapConfig.mapSize; x++)
+        for (int x = 0; x < Constants.Map.MapSize; x++)
         {
             LogicLayer.MapData.Add(new List<MapData>());
-            for (int y = 0; y < MapConfig.mapSize; y++)
+            for (int y = 0; y < Constants.Map.MapSize; y++)
             {
                 LogicLayer.MapData[x].Add(new MapData());
             }

@@ -8,7 +8,10 @@
 
     public static class Map
     {
-        public static int MapSize = MapConfigScriptableObject.Instance.mapSize;
+        private static MapConfigScriptableObject MapConfig => MapConfigScriptableObject.Instance;
+        public static readonly int MapSize = MapConfig.mapSize;
+        public static readonly float ElementSize = MapConfig.elementSize;
+        public static readonly float SplitSize = MapConfig.splitSize;
     }
 
     public static class Minimax

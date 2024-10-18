@@ -42,13 +42,13 @@ public class PlacementButtonDrawer : MonoBehaviour
                 if (LogicLayer.MapData[x][y].Type == MapElementType.None)
                 {
                     var pos = new Vector2(x, y);
-                    var guiPos = new Vector2(x, MapConfig.mapSize - y - 1);
+                    var guiPos = new Vector2(x, Constants.Map.MapSize - y - 1);
                     var worldPos = InterfaceLayer.Generated[guiPos].transform.position;
 
-                    var leftTop = _mainCamera.WorldToScreenPoint(new Vector3(worldPos.x - MapConfig.elementSize / 2,
-                        worldPos.y - MapConfig.elementSize / 2, 0));
-                    var rightBottom = _mainCamera.WorldToScreenPoint(new Vector3(worldPos.x + MapConfig.elementSize / 2,
-                        worldPos.y + MapConfig.elementSize / 2, 0));
+                    var leftTop = _mainCamera.WorldToScreenPoint(new Vector3(worldPos.x - Constants.Map.ElementSize / 2,
+                        worldPos.y - Constants.Map.ElementSize / 2, 0));
+                    var rightBottom = _mainCamera.WorldToScreenPoint(new Vector3(worldPos.x + Constants.Map.ElementSize / 2,
+                        worldPos.y + Constants.Map.ElementSize / 2, 0));
 
                     var size = rightBottom - leftTop;
 
