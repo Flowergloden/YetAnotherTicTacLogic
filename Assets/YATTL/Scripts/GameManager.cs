@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using MinimaxCS;
 using MonteCarloTreeSearch;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public enum Difficulty
 {
@@ -25,14 +24,34 @@ public class GameManager : MonoBehaviour
 
     public Constants.SearchData CurrentCfg => Cfg[difficulty];
 
+    private bool bStartGame = false;
+
+    private void OnGUI()
+    {
+        GUILayout.BeginArea(new Rect(0, 0, 200, 200));
+        GUILayout.BeginVertical();
+        GUILayout.Label("Difficulty");
+        difficulty = (Difficulty)GUILayout.SelectionGrid((int)difficulty, Enum.GetNames(typeof(Difficulty)), 3);
+        if (GUILayout.Button("开始游戏"))
+        {
+            bStartGame = true;
+        }
+
+        if (GUILayout.Button("退出"))
+        {
+            Application.Quit();
+        }
+
+        GUILayout.EndVertical();
+        GUILayout.EndArea();
+    }
+
     private void Awake()
     {
         Instance = this;
-
         bPlayerMove = Constants.Game.bPlayerMoveFirst;
         bCircle = Constants.Game.bCircleFirst;
         Cfg = Constants.AI.Cfg;
-        bMCTS = CurrentCfg.bMCTS;
 
         LogicLayerUpdater.Instance.Initialize();
         gameObject.AddComponent<InterfaceLayer>();
@@ -42,6 +61,23 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (bStartGame)
+        {
+            bMCTS = CurrentCfg.bMCTS;
+            bPlayerMove = Constants.Game.bPlayerMoveFirst;
+            bCircle = Constants.Game.bCircleFirst;
+            Cfg = Constants.AI.Cfg;
+
+            LogicLayerUpdater.Instance.Initialize();
+            Destroy(gameObject.GetComponent<InterfaceLayer>());
+            gameObject.AddComponent<InterfaceLayer>();
+            Destroy(gameObject.GetComponent<WinnerDetector>());
+            gameObject.AddComponent<WinnerDetector>();
+            Destroy(gameObject.GetComponent<PlacementButtonDrawer>());
+            gameObject.AddComponent<PlacementButtonDrawer>();
+            bStartGame = false;
+        }
+
         if (!bPlayerMove)
         {
             if (bMCTS)
