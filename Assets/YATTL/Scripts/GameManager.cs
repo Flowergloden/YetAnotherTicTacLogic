@@ -55,15 +55,16 @@ public class GameManager : MonoBehaviour
             else
             {
                 var minimax =
-                    new MinimaxTree<Game, List<List<MapData>>>(Game.Instance, LogicLayer.Instance.MapData, 10, true);
+                    new MinimaxTree<Game, MinimaxData>(Game.Instance,
+                        new MinimaxData(LogicLayer.Instance.MapData, !bCircle), 10, true);
                 var res = minimax.Run();
-                for (int x = 0; x < res.Count; x++)
+                for (int x = 0; x < res.data.Count; x++)
                 {
-                    for (int y = 0; y < res[0].Count; y++)
+                    for (int y = 0; y < res.data[0].Count; y++)
                     {
-                        if (res[x][y] != LogicLayer.Instance.MapData[x][y])
+                        if (res.data[x][y] != LogicLayer.Instance.MapData[x][y])
                         {
-                            LogicLayerUpdater.Instance.Update(new Vector2(x, y), res[x][y]);
+                            LogicLayerUpdater.Instance.Update(new Vector2(x, y), res.data[x][y]);
                         }
                     }
                 }
