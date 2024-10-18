@@ -67,9 +67,9 @@ public class ConfigImporter
         so.mctsConfig.Clear();
         so.minimaxConfig.Clear();
 
-        for (var i = Difficulty.Begin + 1; i < Difficulty.End; i++)
+        for (var i = Difficulty.A; i <= Difficulty.C; i++)
         {
-            var sheet = xlsx.Workbook.Worksheets[(int)i - 1];
+            var sheet = xlsx.Workbook.Worksheets[(int)i];
 
             var bMCTS = bool.Parse(sheet.Cells["B2"].Value.ToString());
 

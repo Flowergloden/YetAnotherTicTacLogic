@@ -8,13 +8,9 @@ using UnityEngine;
 
 public enum Difficulty
 {
-    Begin,
-
     A,
     B,
     C,
-
-    End,
 }
 
 public class GameManager : MonoBehaviour
