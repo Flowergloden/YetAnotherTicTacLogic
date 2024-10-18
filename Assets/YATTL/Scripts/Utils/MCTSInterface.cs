@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MonteCarloTreeSearch;
 using MinimaxCS;
@@ -102,33 +103,35 @@ public class Game : MonteCarloTreeSearch.IGame<List<List<MapData>>>, MinimaxCS.I
 
     public float Evaluate(MinimaxData data)
     {
+        var cfg = GameManager.Instance.CurrentCfg as Constants.MinimaxData ??
+                  throw new ArgumentException("Chosen cfg file is not Minimax");
         var bWin = data.bCircle == GameManager.Instance.bCircle;
         if (WinnerDetector.Detect(data.data, Constants.Map.MapSize))
         {
             if (bWin)
             {
-                return Constants.Minimax.Win;
+                return cfg.win;
             }
             else
             {
-                return -Constants.Minimax.Win;
+                return -cfg.win;
             }
         }
 
         return Constants.Map.MapSize switch
         {
-            > 1 when WinnerDetector.Detect(data.data, Constants.Map.MapSize - 1) && bWin => Constants.Minimax
-                .OneStep2Win,
-            > 1 when WinnerDetector.Detect(data.data, Constants.Map.MapSize - 1) && !bWin => -Constants.Minimax
-                .OneStep2Win,
-            > 2 when WinnerDetector.Detect(data.data, Constants.Map.MapSize - 2) && bWin => Constants.Minimax
-                .TwoSteps2Win,
-            > 2 when WinnerDetector.Detect(data.data, Constants.Map.MapSize - 2) && !bWin => -Constants.Minimax
-                .TwoSteps2Win,
-            > 3 when WinnerDetector.Detect(data.data, Constants.Map.MapSize - 3) && bWin => Constants.Minimax
-                .TreeSteps2Win,
-            > 3 when WinnerDetector.Detect(data.data, Constants.Map.MapSize - 3) && bWin => -Constants.Minimax
-                .TreeSteps2Win,
+            > 1 when WinnerDetector.Detect(data.data, Constants.Map.MapSize - 1) && bWin => cfg
+                .oneStep2Win,
+            > 1 when WinnerDetector.Detect(data.data, Constants.Map.MapSize - 1) && !bWin => -cfg
+                .oneStep2Win,
+            > 2 when WinnerDetector.Detect(data.data, Constants.Map.MapSize - 2) && bWin => cfg
+                .twoSteps2Win,
+            > 2 when WinnerDetector.Detect(data.data, Constants.Map.MapSize - 2) && !bWin => -cfg
+                .twoSteps2Win,
+            > 3 when WinnerDetector.Detect(data.data, Constants.Map.MapSize - 3) && bWin => cfg
+                .treeSteps2Win,
+            > 3 when WinnerDetector.Detect(data.data, Constants.Map.MapSize - 3) && bWin => -cfg
+                .twoSteps2Win,
             _ => 0
         };
     }

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a8c8bcd236a4ccbbc57c9fa958f5f94, type: 3}
+  m_Name: "AI\u914D\u7F6E"
+  m_EditorClassIdentifier: 
+  minimaxConfig:
+  - difficulty: 0
+    maxDepth: 1
+    win: 0
+    oneStep2Win: 0
+    twoSteps2Win: 0
+    treeSteps2Win: 0
+  - difficulty: 1
+    maxDepth: 20
+    win: 999
+    oneStep2Win: 10
+    twoSteps2Win: 5
+    treeSteps2Win: 1
+  mctsConfig:
+  - difficulty: 2
+    c: 1.5
+    maxDepth: 100
+    gamesPerSimulation: 100
+    maxIteration: 10000

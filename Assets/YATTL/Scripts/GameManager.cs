@@ -1,7 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MinimaxCS;
 using MonteCarloTreeSearch;
 using UnityEngine;
+using UnityEngine.Serialization;
+
+public enum Difficulty
+{
+    A,
+    B,
+    C,
+}
 
 public class GameManager : MonoBehaviour
 {
@@ -11,13 +20,19 @@ public class GameManager : MonoBehaviour
     public bool bCircle;
     public bool bMCTS;
 
+    public Dictionary<Difficulty, Constants.SearchData> Cfg;
+    public Difficulty difficulty = Difficulty.A;
+
+    public Constants.SearchData CurrentCfg => Cfg[difficulty];
+
     private void Awake()
     {
         Instance = this;
 
         bPlayerMove = Constants.Game.bPlayerMoveFirst;
         bCircle = Constants.Game.bCircleFirst;
-        bMCTS = Constants.Game.bMCTS;
+        Cfg = Constants.AI.Cfg;
+        bMCTS = CurrentCfg.bMCTS;
 
         LogicLayerUpdater.Instance.Initialize();
         gameObject.AddComponent<InterfaceLayer>();
@@ -31,8 +46,10 @@ public class GameManager : MonoBehaviour
         {
             if (bMCTS)
             {
-                // TODO: config it
-                var mcts = new MonteCarloTree<List<List<MapData>>, Game>(1.5f, Game.Instance, 3, 10, 1000);
+                var cfg = CurrentCfg as Constants.MCTSData ??
+                          throw new ArgumentException("Chosen cfg file is not MCTS");
+                var mcts = new MonteCarloTree<List<List<MapData>>, Game>(cfg.c, Game.Instance, cfg.maxDepth,
+                    cfg.gamesPerSimulation, cfg.maxIteration);
                 // TODO: make it async
                 var res = mcts.Run();
 
@@ -52,9 +69,12 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                var cfg = CurrentCfg as Constants.MinimaxData ??
+                          throw new ArgumentException("Chosen cfg file is not Minimax");
+
                 var minimax =
                     new MinimaxTree<Game, MinimaxData>(Game.Instance,
-                        new MinimaxData(LogicLayer.Instance.MapData, !bCircle), 10, true);
+                        new MinimaxData(LogicLayer.Instance.MapData, !bCircle), cfg.maxDepth, true);
                 var res = minimax.Run();
                 for (int x = 0; x < res.data.Count; x++)
                 {
