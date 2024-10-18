@@ -12,7 +12,7 @@
 
 ### 配置表
 
-位于 Assets/YATTL/Resources/Editor/Configs/
+位于 Assets/YATTL/Resources/Editor/Configs/\
 表内有详细说明
 
 ### 导表工具
