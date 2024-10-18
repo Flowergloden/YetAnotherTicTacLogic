@@ -101,6 +101,6 @@ public class Game : IGame<List<List<MapData>>>
 
     public bool IsEnd(List<List<MapData>> data)
     {
-        return WinnerDetector.Detect(data);
+        return WinnerDetector.Detect(data, Constants.Map.MapSize) || GetPossibleMoves(data).Length == 0;
     }
 }
