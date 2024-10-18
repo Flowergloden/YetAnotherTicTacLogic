@@ -1,3 +1,6 @@
 [submodule "Assets/Submodule/MCTS"]
 	path = Assets/Submodule/MCTS
 	url = git@github.com:Flowergloden/MCTSCS.git
+[submodule "Assets/Submodule/Minimax"]
+	path = Assets/Submodule/Minimax
+	url = git@github.com:Flowergloden/MinimaxCS.git
