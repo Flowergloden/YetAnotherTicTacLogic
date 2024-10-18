@@ -58,4 +58,9 @@ public class InterfaceLayer : MonoBehaviour
             Generated[new Vector2(x, y)] = obj;
         }
     }
+
+    private void OnDestroy()
+    {
+        Destroy(_map);
+    }
 }

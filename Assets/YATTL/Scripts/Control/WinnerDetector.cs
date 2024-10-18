@@ -5,8 +5,16 @@ using UnityEngine;
 
 public class WinnerDetector : MonoBehaviour
 {
+    public static WinnerDetector Instance;
+
+
     private static LogicLayer LogicLayer => LogicLayer.Instance;
-    public event EventHandler OnWin = (_, _) => { Debug.Log("Winner"); };
+    public event EventHandler OnWin;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Update()
     {
