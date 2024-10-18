@@ -6,9 +6,9 @@
 
 ## 文档
 
-项目介绍: [README.md](Docs/Intro.md)
-开发者文档： [开发者文档](Docs/Developer.md)
-策划文档： [策划文档](Docs/Designer.md)
+[项目介绍](Docs/Intro.md)
+[开发者文档](Docs/Developer.md)
+[策划文档](Docs/Designer.md)
 
 ## 相关链接
 
